@@ -8,6 +8,11 @@ Miniconda:
 
 https://docs.anaconda.com/miniconda/miniconda-install/
 
+Visual Studio Code:
+
+https://code.visualstudio.com/
+
+
 conda create -n llm python=3.10
 
 conda activate llm
