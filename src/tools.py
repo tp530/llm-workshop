@@ -1,14 +1,16 @@
 import random
-import time
-
 
 def get_current_wait_time(hospital: str) -> int | str:
-    """Dummy function to generate fake wait times"""
+    """An example function to generate wait times"""
 
-    if hospital not in ["A", "B", "C", "D"]:
-        return f"Hospital {hospital} does not exist"
+    hospitals = [
+        "Wallace-Hamilton",
+        "Burke, Griffin and Cooper",
+        "Walton LLC",
+        "Garcia Ltd"
+    ]
 
-    # Simulate API call delay
-    time.sleep(1)
+    if hospital not in hospitals:
+        return f"Hospital {hospital} does not exist."
 
-    return random.randint(0, 10000)
+    return random.randint(10, 100)

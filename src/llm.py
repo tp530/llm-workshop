@@ -17,3 +17,15 @@ messages = [
 answer = chat_model.invoke(messages)
 
 print(f"{Fore.GREEN}\n{answer.content}\n")
+
+"""
+
+Try the following prompts:
+
+What is the NHS?
+
+What is blood pressure?
+
+Who is the prime minister of the UK?
+
+"""

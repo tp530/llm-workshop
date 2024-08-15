@@ -1,3 +1,4 @@
+import os
 import dotenv
 from langchain import hub
 from langchain.agents import AgentExecutor, Tool, create_openai_functions_agent
@@ -17,6 +18,8 @@ from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 REVIEWS_CHROMA_PATH = "chroma_data/"
 
 dotenv.load_dotenv()
+
+# print(os.getenv('OPENAI_API_KEY'))
 
 review_template_str = """Your job is to use patient
 reviews to answer questions about their experience at
@@ -42,6 +45,14 @@ review_prompt_template = ChatPromptTemplate(
     input_variables=["context", "question"], messages=messages
 )
 
+"""
+Model name.......: gpt-3.5-turbo-0125
+Context window...: 16,385 tokens
+Maximum output...: 4,096 tokens
+Training data....: Up to September 2021
+
+Temperature is a decimal number between 0 and 2, with a default value of 1. It is used to control the randomness of the output.
+"""
 chat_model = ChatOpenAI(model="gpt-3.5-turbo-0125", temperature=0)
 
 output_parser = StrOutputParser()
@@ -52,9 +63,6 @@ reviews_vector_db = Chroma(
 )
 
 reviews_retriever = reviews_vector_db.as_retriever(k=10)
-
-# docs = reviews_retriever.invoke("Catherine Yang")
-# print(docs)
 
 review_chain = (
     {"context": reviews_retriever, "question": RunnablePassthrough()}
@@ -75,7 +83,7 @@ tools = [
         Pass the entire question as input to the tool. For instance,
         if the question is "What do patients think about the triage system?",
         the input should be "What do patients think about the triage system?"
-        """,
+        """
     ),
     Tool(
         name="Waits",
@@ -87,15 +95,23 @@ tools = [
         minutes. Do not pass the word "hospital" as input,
         only the hospital name itself. For instance, if the question is
         "What is the wait time at hospital A?", the input should be "A".
-        """,
-    ),
+        """
+    )
 ]
 
 hospital_agent_prompt = hub.pull("hwchase17/openai-functions-agent")
 
+"""
+Model name.......: gpt-3.5-turbo-1106
+Context window...: 16,385 tokens
+Maximum output...: 4,096 tokens
+Training data....: Up to September 2021
+
+Temperature is a decimal number between 0 and 2, with a default value of 1. It is used to control the randomness of the output.
+"""
 agent_chat_model = ChatOpenAI(
     model="gpt-3.5-turbo-1106",
-    temperature=0,
+    temperature=0
 )
 
 hospital_agent = create_openai_functions_agent(
@@ -108,5 +124,8 @@ hospital_agent_executor = AgentExecutor(
     agent=hospital_agent,
     tools=tools,
     return_intermediate_steps=True,
-    verbose=True,
+    verbose=False,
 )
+
+def execution_details(prompt_result: str) -> str:
+    return prompt_result["intermediate_steps"][0][0].log.replace("\n", "", 10)

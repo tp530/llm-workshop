@@ -19,4 +19,10 @@ What does Catherine Yang think about the hospital staff?
 
 What do patients think about Wallace-Hamilton hospital?
 
+What do patients think about Michael Smith?
+
+How many patients reviewed Michael Smith?
+
+How many patients provided feedback about Michael Smith?
+
 """

@@ -1,22 +1,31 @@
 # LLM workshop
 
-Open AI API keys:
+### Open AI API keys
 
 https://platform.openai.com/api-keys
 
-Miniconda:
+### Setting up Miniconda and Python
 
-https://docs.anaconda.com/miniconda/miniconda-install/
+Create an new environment:
 
-Visual Studio Code:
+`conda create -n llm python=3.10`
 
-https://code.visualstudio.com/
+List all the existing environments:
 
+`conda env list`
 
-conda create -n llm python=3.10
+Activate the environment:
 
-conda activate llm
+`conda activate llm`
 
-Dependencies:
+Install the dependencies:
 
-pip install -r requirements.txt
+`pip install -r requirements.txt`
+
+### Something went wrong?
+
+Delete the environment and start again:
+
+`conda deactivate`
+
+`conda remove --name llm --all`
