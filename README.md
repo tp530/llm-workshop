@@ -1,5 +1,13 @@
 # LLM workshop
 
+### Video tutorial – Apple macOS
+
+https://www.youtube.com/watch?v=UN55qavMoQ0
+
+### Video tutorial – Microsoft Windows
+
+https://www.youtube.com/watch?v=mpoxTuILU9c
+
 ### Setting up Miniconda and Python
 
 Create a new environment:
